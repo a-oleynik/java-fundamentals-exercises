@@ -1,6 +1,6 @@
 package com.bobocode.oop.service;
 
-import com.bobocode.util.ExerciseNotCompletedException;
+import com.bobocode.oop.data.FlightDao;
 
 import java.util.List;
 
@@ -12,6 +12,8 @@ import java.util.List;
  */
 public class FlightService {
 
+    private final FlightDao flightDao = new FlightDao();
+
     /**
      * Adds a new flight number
      *
@@ -19,7 +21,7 @@ public class FlightService {
      * @return {@code true} if a flight number was added, {@code false} otherwise
      */
     public boolean registerFlight(String flightNumber) {
-        throw new ExerciseNotCompletedException();
+        return flightDao.register(flightNumber);
     }
 
     /**
@@ -29,6 +31,8 @@ public class FlightService {
      * @return a list of found flight numbers
      */
     public List<String> searchFlights(String query) {
-        throw new ExerciseNotCompletedException();
+        return flightDao.findAll().stream()
+                .filter(flight->flight.contains(query))
+                .toList();
     }
 }
